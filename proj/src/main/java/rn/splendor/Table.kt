@@ -1,8 +1,8 @@
 package rn.splendor
 
 class Table {
-    private val bank: Bank
-    private val user: User
+    val bank: Bank
+    val user: User
     private var cards: Array<Card>
 
     constructor(cards: Array<Card>) {

@@ -1,9 +1,13 @@
 package rn.splendor
 
-class User {
-    private val bank: Bank
+import rn.splendor.Global.Companion.userBankLimit
 
-    constructor() {
-        bank = Bank.createEmpty()
-    }
+class User {
+    private val bank: Bank = Bank.createEmpty()
+
+    val hasTwoSpaces: Boolean
+        get() = userBankLimit - bank.total >= 2
+
+    val hasThreeSpaces: Boolean
+        get() = userBankLimit - bank.total >= 3
 }
