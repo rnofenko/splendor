@@ -2,16 +2,28 @@ package rn.splendor
 
 class BruteForcer {
     fun start(table: Table) {
-        var root = State(table)
+        val root = State(table)
+        next(root)
     }
 
     private fun next(state: State) {
-        getAvailableChoices(state.table)
+        val actions = getAvailableActions(state.table)
+        for(action in actions) {
+            val newState = apply(state, action)
+            next(newState)
+        }
     }
 
-    private fun getAvailableChoices(table: Table) {
+    private fun apply(state: State, action: IAction): State {
+        val newState = state.clone()
+        return newState
+    }
+
+    private fun getAvailableActions(table: Table): List<IAction> {
         val actions = ArrayList<IAction>()
         actions.addAll(getAvailableGemActions(table))
+
+        return actions
     }
 
     private fun getAvailableGemActions(table: Table): List<IAction> {
