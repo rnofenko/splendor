@@ -1,6 +1,7 @@
 package rn.splendor
 
 import org.springframework.stereotype.Component
+import rn.splendor.solver.BruteForcer
 
 @Component
 class TaskRunner {

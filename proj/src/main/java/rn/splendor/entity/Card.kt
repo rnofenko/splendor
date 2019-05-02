@@ -1,4 +1,4 @@
-package rn.splendor
+package rn.splendor.entity
 
 class Card(val reward: Gem, val points: Int, val cost: Bank, isBlank: Boolean = false) {
     companion object {

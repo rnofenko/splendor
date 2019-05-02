@@ -1,8 +1,21 @@
-package rn.splendor
+package rn.splendor.solver
+
+import rn.splendor.Choices
+import rn.splendor.StatePrinter
+import rn.splendor.action.ActionExecutor
+import rn.splendor.action.ActionFactory
+import rn.splendor.action.IAction
+import rn.splendor.action.IActionExecutor
+import rn.splendor.entity.Bank
+import rn.splendor.entity.Table
+import rn.splendor.entity.User
 
 class BruteForcer {
+    private var actionExecutor: IActionExecutor = ActionExecutor()
+
     fun start(table: Table) {
         val root = State(table)
+        StatePrinter().print(root)
         next(root)
     }
 
@@ -16,6 +29,7 @@ class BruteForcer {
 
     private fun apply(state: State, action: IAction): State {
         val newState = state.clone()
+        actionExecutor.execute(newState, action)
         return newState
     }
 

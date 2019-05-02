@@ -1,4 +1,6 @@
-package rn.splendor
+package rn.splendor.solver
+
+import rn.splendor.entity.Table
 
 class State {
     val table: Table

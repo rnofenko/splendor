@@ -7,7 +7,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest()
 public class ApplicationTests {

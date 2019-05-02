@@ -1,5 +1,7 @@
 package rn.splendor
 
+import rn.splendor.entity.Bank
+
 class Choices {
 
     companion object {

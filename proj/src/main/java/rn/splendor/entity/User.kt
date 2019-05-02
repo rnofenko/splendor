@@ -1,9 +1,9 @@
-package rn.splendor
+package rn.splendor.entity
 
 import rn.splendor.Global.Companion.userBankLimit
 
 class User {
-    private val bank: Bank = Bank.createEmpty()
+    val bank: Bank = Bank.createEmpty()
 
     val hasTwoSpaces: Boolean
         get() = userBankLimit - bank.total >= 2

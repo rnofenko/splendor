@@ -1,7 +1,7 @@
-package rn.splendor
+package rn.splendor.entity
 
 class Bank {
-    private val gems : IntArray
+    val gems : IntArray
     var total: Int
         private set
 

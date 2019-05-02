@@ -1,4 +1,4 @@
-package rn.splendor
+package rn.splendor.entity
 
 import com.sun.media.sound.InvalidDataException
 
