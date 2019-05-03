@@ -16,6 +16,10 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		runner.run();
+		try {
+			runner.run();
+		} catch (Exception ex) {
+			System.out.println("FATAL ERROR: " + ex);
+		}
 	}
 }

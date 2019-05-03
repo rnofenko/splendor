@@ -1,8 +1,7 @@
-package rn.splendor
+package rn.splendor.print
 
 import rn.splendor.entity.Bank
 import rn.splendor.entity.Gem
-import rn.splendor.print.ConsoleColors
 import rn.splendor.solver.State
 
 class StatePrinter {

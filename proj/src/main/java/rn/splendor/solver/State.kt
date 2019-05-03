@@ -4,12 +4,14 @@ import rn.splendor.entity.Table
 
 class State {
     val table: Table
+    val stepNo: Int
 
-    constructor(table: Table) {
+    constructor(table: Table, stepNo: Int) {
         this.table = table
+        this.stepNo = stepNo
     }
 
-    fun clone(): State {
-        return State(table.clone())
+    fun next(): State {
+        return State(table.clone(), stepNo + 1)
     }
 }

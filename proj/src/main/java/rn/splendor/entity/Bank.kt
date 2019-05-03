@@ -15,6 +15,11 @@ class Bank {
         this.total = this.gems.sum()
     }
 
+    constructor(gems: IntArray) {
+        this.gems = gems
+        this.total = this.gems.sum()
+    }
+
     fun equalOrMore(bank: Bank): Boolean {
         for (i in gems.indices) {
             if(gems[i] < bank.gems[i]) {
@@ -32,6 +37,24 @@ class Bank {
     private fun add(gem: Int, count: Int) {
         this.gems[gem] += count
         this.total += count
+    }
+
+    fun clone(): Bank {
+        return Bank(gems.clone())
+    }
+
+    fun minus(bank: Bank) {
+        for (i in gems.indices) {
+            gems[i] -= bank.gems[i]
+        }
+        this.total = this.gems.sum()
+    }
+
+    fun plus(bank: Bank) {
+        for (i in gems.indices) {
+            gems[i] += bank.gems[i]
+        }
+        this.total = this.gems.sum()
     }
 
     companion object {
