@@ -19,6 +19,7 @@ class StatePrinter {
         val table = state.table
         val cards = table.cards
 
+        System.out.println(state.stepNo)
         var index = 0
         for (card in cards) {
             index++

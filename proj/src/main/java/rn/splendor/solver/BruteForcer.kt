@@ -13,11 +13,12 @@ import rn.splendor.entity.Table
 class BruteForcer {
     private val log = LoggerFactory.getLogger(this.javaClass)
     private var counter = 0
-    private var actionExecutor: IActionExecutor = ActionExecutor()
+    private val actionExecutor: IActionExecutor = ActionExecutor()
+    private val printer = StatePrinter()
 
     fun start(table: Table) {
-        val root = State(table, 0)
-        StatePrinter().print(root)
+        val root = State(table)
+        printer.print(root)
         next(root)
     }
 
@@ -25,8 +26,10 @@ class BruteForcer {
         counter++
         val actions = getAvailableActions(state.table)
         log.info("$counter. StepNo=${state.stepNo} actions count=${actions.size} ")
+        printer.print(state)
         for(action in actions) {
             val newState = actionExecutor.execute(state, action)
+            printer.print(newState)
             next(newState)
         }
     }
