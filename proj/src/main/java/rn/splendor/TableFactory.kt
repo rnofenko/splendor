@@ -1,10 +1,11 @@
 package rn.splendor
 
+import rn.splendor.card.ICardMagazine
 import rn.splendor.entity.Table
 
 class TableFactory {
-    fun create(cardSet: CardSet): Table {
-        val cards = cardSet.getInitialSet()
+    fun create(magazine: ICardMagazine): Table {
+        val cards = magazine.getInitial()
         return Table(cards)
     }
 }

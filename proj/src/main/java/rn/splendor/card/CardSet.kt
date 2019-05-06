@@ -1,57 +1,19 @@
-package rn.splendor
+package rn.splendor.card
 
 import rn.splendor.entity.Bank
+import rn.splendor.entity.CARD2
 import rn.splendor.entity.Card
 import rn.splendor.entity.Gem
-import java.time.LocalDateTime
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.random.Random
 
 class CardSet {
-    private val LEVEL_SIZE = 4
-    private val level0 : ArrayList<Card>
-    private val level1 : ArrayList<Card>
-    private val level2 : ArrayList<Card>
-    private val rand: Random
-
-    constructor() {
-        level0 = ArrayList(allLevel0)
-        level1 = ArrayList(allLevel1)
-        level2 = ArrayList(allLevel2)
-        rand = Random(LocalDateTime.now().nano)
-    }
-
-    fun getInitialSet() : Array<Card> {
-        val list = getInitial(level0)
-        list.addAll(getInitial(level1))
-        list.addAll(getInitial(level2))
-        return list.toTypedArray()
-    }
-
-    fun pop(list: ArrayList<Card>) : Card {
-        if(list.isEmpty()) {
-            return Card.blank
-        }
-        val index = rand.nextInt(list.size)
-        val card = list[index]
-        list.removeAt(index)
-        return card
-    }
-
-    private fun getInitial(source: ArrayList<Card>) : ArrayList<Card> {
-        val res = ArrayList<Card>()
-        for(i in 0..LEVEL_SIZE) {
-            res.add(pop(source))
-        }
-        return res
-    }
-
     companion object {
+        val LEVEL_SIZE = 4
+
         val allLevel0 : List<Card> = Arrays.asList(
-                Card(Gem.W, 0, Bank.w(3,1,0,0,1)),
-                Card(Gem.W, 0, Bank.u(1,2,1,1)),
-                Card(Gem.W, 0, Bank.u(2,2,0,1)),
+                CARD2.W0_W3,
+                CARD2.W0_U,
+                CARD2.W0_U2,
 
                 Card(Gem.U, 0, Bank.w(1,0,1,2,1)),
                 Card(Gem.U, 0, Bank.w(1,0,2,2)),

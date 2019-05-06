@@ -1,13 +1,8 @@
 package rn.splendor.solver
 
 import org.slf4j.LoggerFactory
-import rn.splendor.Choices
+import rn.splendor.action.*
 import rn.splendor.print.StatePrinter
-import rn.splendor.action.ActionExecutor
-import rn.splendor.action.ActionFactory
-import rn.splendor.action.IAction
-import rn.splendor.action.IActionExecutor
-import rn.splendor.entity.Bank
 import rn.splendor.entity.Table
 
 class BruteForcer {
@@ -15,6 +10,7 @@ class BruteForcer {
     private var counter = 0
     private val actionExecutor: IActionExecutor = ActionExecutor()
     private val printer = StatePrinter()
+    private val takeGemActionProvider = TakeGemActionProvider()
 
     fun start(table: Table) {
         val root = State(table)
@@ -25,6 +21,10 @@ class BruteForcer {
     private fun next(state: State) {
         counter++
         val actions = getAvailableActions(state.table)
+        if(actions.isEmpty()) {
+            log.error("no actions")
+        }
+
         log.info("$counter. StepNo=${state.stepNo} actions count=${actions.size} ")
         printer.print(state)
         for(action in actions) {
@@ -36,30 +36,8 @@ class BruteForcer {
 
     private fun getAvailableActions(table: Table): List<IAction> {
         val actions = ArrayList<IAction>()
-        actions.addAll(getAvailableGemActions(table))
+        actions.addAll(takeGemActionProvider.get(table))
 
         return actions
-    }
-
-    private fun getAvailableGemActions(table: Table): List<IAction> {
-        val gems = getAvailableGemSelections(table)
-
-        return gems
-                .filter { table.bank.equalOrMore(it) }
-                .map { ActionFactory.createTakeGem(it) }
-    }
-
-    private fun getAvailableGemSelections(table: Table): List<Bank> {
-        val user = table.user
-
-        if (table.bank.total >= 3 && user.hasThreeSpaces) {
-            return Choices.gem3AndDuplicate
-        }
-
-        if (table.bank.total >= 2 &&user.hasTwoSpaces) {
-            return Choices.gem2
-        }
-
-        return emptyList()
     }
 }
