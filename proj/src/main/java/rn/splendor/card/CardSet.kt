@@ -1,7 +1,7 @@
 package rn.splendor.card
 
 import rn.splendor.entity.Bank
-import rn.splendor.entity.CARD2
+import rn.splendor.entity.CARD
 import rn.splendor.entity.Card
 import rn.splendor.entity.Gem
 import java.util.*
@@ -11,9 +11,9 @@ class CardSet {
         val LEVEL_SIZE = 4
 
         val allLevel0 : List<Card> = Arrays.asList(
-                CARD2.W0_W3,
-                CARD2.W0_U,
-                CARD2.W0_U2,
+                CARD.W0_W3,
+                CARD.W0_U,
+                CARD.W0_U2,
 
                 Card(Gem.U, 0, Bank.w(1,0,1,2,1)),
                 Card(Gem.U, 0, Bank.w(1,0,2,2)),
