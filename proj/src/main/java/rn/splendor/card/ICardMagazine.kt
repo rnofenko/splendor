@@ -6,4 +6,6 @@ interface ICardMagazine {
     fun getInitial(): Array<Card>
 
     fun pop(level: CardLevel): Card
+
+    fun clone(): ICardMagazine
 }

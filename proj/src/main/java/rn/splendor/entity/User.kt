@@ -4,6 +4,8 @@ import rn.splendor.Global.Companion.userBankLimit
 
 class User {
     val bank: Bank
+    var points: Int = 0
+        private set
 
     constructor() {
         bank = Bank.createEmpty()
@@ -25,5 +27,9 @@ class User {
 
     fun plus(bank: Bank) {
         this.bank.plus(bank)
+    }
+
+    fun addPoints(card: Card) {
+        points += card.points
     }
 }

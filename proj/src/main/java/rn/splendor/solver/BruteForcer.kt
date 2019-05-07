@@ -1,7 +1,9 @@
 package rn.splendor.solver
 
 import org.slf4j.LoggerFactory
-import rn.splendor.action.*
+import rn.splendor.action.executor.ActionExecutor
+import rn.splendor.action.executor.IActionExecutor
+import rn.splendor.action.provider.UnitedActionProvider
 import rn.splendor.print.StatePrinter
 import rn.splendor.entity.Table
 
@@ -10,7 +12,7 @@ class BruteForcer {
     private var counter = 0
     private val actionExecutor: IActionExecutor = ActionExecutor()
     private val printer = StatePrinter()
-    private val takeGemActionProvider = TakeGemActionProvider()
+    private val actionProvider = UnitedActionProvider()
 
     fun start(table: Table) {
         val root = State(table)
@@ -20,7 +22,7 @@ class BruteForcer {
 
     private fun next(state: State) {
         counter++
-        val actions = getAvailableActions(state.table)
+        val actions = actionProvider.get(state.table)
         if(actions.isEmpty()) {
             log.error("no actions")
         }
@@ -32,12 +34,5 @@ class BruteForcer {
             printer.print(newState)
             next(newState)
         }
-    }
-
-    private fun getAvailableActions(table: Table): List<IAction> {
-        val actions = ArrayList<IAction>()
-        actions.addAll(takeGemActionProvider.get(table))
-
-        return actions
     }
 }

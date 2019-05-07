@@ -44,4 +44,8 @@ class DefinedCardMagazine : ICardMagazine {
         }
         return res
     }
+
+    override fun clone(): ICardMagazine {
+        return DefinedCardMagazine(level0, level1, level2)
+    }
 }

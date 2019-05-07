@@ -29,12 +29,23 @@ class Bank {
         return true
     }
 
-    private fun add(gem: Gem, count: Int) {
-        this.gems[gem.index] += count
-        this.total += count
+    fun less(bank: Bank): Boolean {
+        for (i in gems.indices) {
+            if(gems[i] < bank.gems[i]) {
+                return true
+            }
+        }
+        return false
     }
 
-    private fun add(gem: Int, count: Int) {
+    fun plus(gem: Gem, count: Int = 1): Bank {
+        this.gems[gem.index] += count
+        this.total += count
+
+        return this
+    }
+
+    private fun plus(gem: Int, count: Int) {
         this.gems[gem] += count
         this.total += count
     }
@@ -57,6 +68,26 @@ class Bank {
         this.total = this.gems.sum()
     }
 
+    override fun toString(): String {
+        return "W${gems[Gem.W.index]} U${gems[Gem.U.index]}"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Bank
+
+        if (total != other.total) return false
+        if (!gems.contentEquals(other.gems)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return gems.contentHashCode()
+    }
+
     companion object {
         fun createForTable() : Bank {
             return Bank(4)
@@ -68,14 +99,14 @@ class Bank {
 
         fun create(gem: Gem, count: Int): Bank {
             val bank = createEmpty()
-            bank.add(gem, count)
+            bank.plus(gem, count)
             return bank
         }
 
         fun ofIndices(indices: IntArray): Bank {
             val bank = createEmpty()
             for(i in indices) {
-                bank.add(i, 1)
+                bank.plus(i, 1)
             }
             return bank
         }

@@ -1,6 +1,9 @@
-package rn.splendor.action
+package rn.splendor.action.provider
 
 import rn.splendor.Choices
+import rn.splendor.action.ActionFactory
+import rn.splendor.action.IAction
+import rn.splendor.action.IActionProvider
 import rn.splendor.entity.Bank
 import rn.splendor.entity.Table
 
@@ -11,7 +14,7 @@ class TakeGemActionProvider : IActionProvider {
 
         return gems
                 .filter { table.bank.equalOrMore(it) }
-                .map { ActionFactory.createTakeGem(it) }
+                .map { ActionFactory.takeGem(it) }
     }
 
     private fun getAvailableGemSelections(table: Table): List<Bank> {

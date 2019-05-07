@@ -6,6 +6,6 @@ import rn.splendor.entity.Table
 class TableFactory {
     fun create(magazine: ICardMagazine): Table {
         val cards = magazine.getInitial()
-        return Table(cards)
+        return Table(cards, magazine)
     }
 }

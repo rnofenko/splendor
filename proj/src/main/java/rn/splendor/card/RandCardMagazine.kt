@@ -13,12 +13,14 @@ class RandCardMagazine : ICardMagazine {
     private val level2 : ArrayList<Card>
     private val rand: Random
 
-    constructor() {
-        level0 = ArrayList(CardSet.allLevel0)
-        level1 = ArrayList(CardSet.allLevel1)
-        level2 = ArrayList(CardSet.allLevel2)
+    constructor() : this(CardSet.allLevel0, CardSet.allLevel1, CardSet.allLevel2)
+
+    constructor(level0 : List<Card>, level1 : List<Card>, level2 : List<Card>) {
+        this.level0 = ArrayList(level0)
+        this.level1 = ArrayList(level1)
+        this.level2 = ArrayList(level2)
         rand = Random(LocalDateTime.now().nano)
-        mapByLevel = mapOf(CardLevel.L0 to level0, CardLevel.L1 to level1, CardLevel.L2 to level2)
+        mapByLevel = mapOf(CardLevel.L0 to this.level0, CardLevel.L1 to this.level1, CardLevel.L2 to this.level2)
     }
 
     override fun getInitial() : Array<Card> {
@@ -49,5 +51,9 @@ class RandCardMagazine : ICardMagazine {
             res.add(pop(source))
         }
         return res
+    }
+
+    override fun clone(): ICardMagazine {
+        return RandCardMagazine(level0, level1, level2)
     }
 }
