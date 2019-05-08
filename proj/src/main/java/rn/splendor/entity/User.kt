@@ -11,8 +11,9 @@ class User {
         bank = Bank.createEmpty()
     }
 
-    constructor(bank: Bank) {
+    constructor(bank: Bank, points: Int) {
         this.bank = bank
+        this.points = points
     }
 
     val hasTwoSpaces: Boolean
@@ -22,7 +23,7 @@ class User {
         get() = userBankLimit - bank.total >= 3
 
     fun clone(): User {
-        return User(bank.clone())
+        return User(bank.clone(), points)
     }
 
     fun plus(bank: Bank) {
