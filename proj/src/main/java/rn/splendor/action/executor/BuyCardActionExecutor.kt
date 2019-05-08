@@ -25,6 +25,7 @@ class BuyCardActionExecutor : IActionExecutor {
 
         user.addPoints(card)
         user.bank.minus(card.cost)
+        table.bank.plus(card.cost)
 
         val newCard = table.magazine.pop(card.level)
         deck.replace(card, newCard)

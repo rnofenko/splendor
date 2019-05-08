@@ -15,6 +15,21 @@ class BuyCardActionExecutorTests {
     private lateinit var executor: BuyCardActionExecutor
 
     @Test
+    fun executor_should_return_gems_when_user_buys_card() {
+        //prepare
+        val table = Tester.table(Gc.W1_G4)
+        table.user.bank.plus(Gem.G, 4)
+        val initialState = State(table)
+        val action = ActionFactory.buyCard(Gc.W1_G4)
+
+        //test
+        val newState = executor.execute(initialState, action)
+
+        //check
+        assertEquals(8, newState.table.bank.gems[Gem.G.index])
+    }
+
+    @Test
     fun executor_should_throw_error_when_user_bank_is_empty() {
         //prepare
         val table = Tester.table(Gc.W1_G4)
