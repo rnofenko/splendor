@@ -1,6 +1,6 @@
 package rn.splendor.entity
 
-class Bank {
+class GemBank {
     val gems : IntArray
     var total: Int
         private set
@@ -20,7 +20,7 @@ class Bank {
         this.total = this.gems.sum()
     }
 
-    fun equalOrMore(bank: Bank): Boolean {
+    fun equalOrMore(bank: GemBank): Boolean {
         for (i in gems.indices) {
             if(gems[i] < bank.gems[i]) {
                 return false
@@ -29,7 +29,7 @@ class Bank {
         return true
     }
 
-    fun less(bank: Bank): Boolean {
+    fun less(bank: GemBank): Boolean {
         for (i in gems.indices) {
             if(gems[i] < bank.gems[i]) {
                 return true
@@ -38,7 +38,7 @@ class Bank {
         return false
     }
 
-    fun plus(gem: Gem, count: Int = 1): Bank {
+    fun plus(gem: Gem, count: Int = 1): GemBank {
         this.gems[gem.index] += count
         this.total += count
 
@@ -50,18 +50,18 @@ class Bank {
         this.total += count
     }
 
-    fun clone(): Bank {
-        return Bank(gems.clone())
+    fun clone(): GemBank {
+        return GemBank(gems.clone())
     }
 
-    fun minus(bank: Bank) {
+    fun minus(bank: GemBank) {
         for (i in gems.indices) {
             gems[i] -= bank.gems[i]
         }
         this.total = this.gems.sum()
     }
 
-    fun plus(bank: Bank) {
+    fun plus(bank: GemBank) {
         for (i in gems.indices) {
             gems[i] += bank.gems[i]
         }
@@ -69,14 +69,14 @@ class Bank {
     }
 
     override fun toString(): String {
-        return "W${gems[Gem.W.index]} U${gems[Gem.U.index]}"
+        return "W${gems[Gem.W.index]} U${gems[Gem.U.index]} G${gems[Gem.G.index]} R${gems[Gem.R.index]} B${gems[Gem.B.index]}"
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Bank
+        other as GemBank
 
         if (total != other.total) return false
         if (!gems.contentEquals(other.gems)) return false
@@ -89,21 +89,21 @@ class Bank {
     }
 
     companion object {
-        fun createForTable() : Bank {
-            return Bank(4)
+        fun createForTable() : GemBank {
+            return GemBank(4)
         }
 
-        fun createEmpty() : Bank {
-            return Bank(0)
+        fun createEmpty() : GemBank {
+            return GemBank(0)
         }
 
-        fun create(gem: Gem, count: Int): Bank {
+        fun create(gem: Gem, count: Int): GemBank {
             val bank = createEmpty()
             bank.plus(gem, count)
             return bank
         }
 
-        fun ofIndices(indices: IntArray): Bank {
+        fun ofIndices(indices: IntArray): GemBank {
             val bank = createEmpty()
             for(i in indices) {
                 bank.plus(i, 1)
@@ -111,24 +111,34 @@ class Bank {
             return bank
         }
 
-        fun g(g: Int, r: Int = 0, b: Int = 0) : Bank {
-            return Bank(0, 0, g, r, b)
+        fun g(g: Int, r: Int = 0, b: Int = 0) : GemBank {
+            return GemBank(0, 0, g, r, b)
         }
 
-        fun w(w: Int, u: Int = 0, g: Int = 0, r: Int = 0, b: Int = 0) : Bank {
-            return Bank(w, u, g, r, b)
+        fun w(w: Int, u: Int = 0, g: Int = 0, r: Int = 0, b: Int = 0) : GemBank {
+            return GemBank(w, u, g, r, b)
         }
 
-        fun u(u: Int, g: Int = 0, r: Int = 0, b: Int = 0) : Bank {
-            return Bank(0, u, g, r, b)
+        fun u(u: Int, g: Int = 0, r: Int = 0, b: Int = 0) : GemBank {
+            return GemBank(0, u, g, r, b)
         }
 
-        fun r(r: Int, b: Int = 0) : Bank {
-            return Bank(0, 0, 0, r, b)
+        fun r(r: Int, b: Int = 0) : GemBank {
+            return GemBank(0, 0, 0, r, b)
         }
 
-        fun b(b: Int) : Bank {
-            return Bank(0, 0, 0, 0, b)
+        fun b(b: Int) : GemBank {
+            return GemBank(0, 0, 0, 0, b)
+        }
+
+        fun combine(tempGems: GemBank, permanentGems: GemBank): GemBank {
+            val tempArray = tempGems.gems
+            val permanentArray = permanentGems.gems
+            val sum = IntArray(tempGems.gems.size)
+            for(i in sum.indices) {
+                sum[i] = tempArray[i] + permanentArray[i]
+            }
+            return GemBank(sum)
         }
     }
 }

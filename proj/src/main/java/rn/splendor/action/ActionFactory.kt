@@ -1,11 +1,11 @@
 package rn.splendor.action
 
-import rn.splendor.entity.Bank
+import rn.splendor.entity.GemBank
 import rn.splendor.entity.Card
 
 class ActionFactory {
     companion object {
-        fun takeGem(bank: Bank) : IAction {
+        fun takeGem(bank: GemBank) : IAction {
             return TakeGemAction(bank)
         }
 

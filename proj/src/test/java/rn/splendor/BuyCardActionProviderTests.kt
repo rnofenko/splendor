@@ -15,7 +15,7 @@ class BuyCardActionProviderTests {
     fun provider_should_return_two_actions_when_user_bank_has_a_lot() {
         //prepare
         val table = Tester.table(Gc.W0_W3UB, Gc.W0_U2G2B)
-        table.user.bank.plus(Gem.W, 3).plus(Gem.U, 2).plus(Gem.G, 2).plus(Gem.B)
+        table.user.plus(Gem.W, 3).plus(Gem.U, 2).plus(Gem.G, 2).plus(Gem.B)
 
         //test
         val actions = provider.get(table)
@@ -28,7 +28,7 @@ class BuyCardActionProviderTests {
     fun provider_should_return_one_action_when_user_bank_has_only_for_one_card() {
         //prepare
         val table = Tester.table(Gc.W0_W3UB, Gc.W0_U2G2B)
-        table.user.bank.plus(Gem.W, 3).plus(Gem.U).plus(Gem.B)
+        table.user.plus(Gem.W, 3).plus(Gem.U).plus(Gem.B)
 
         //test
         val actions = provider.get(table)

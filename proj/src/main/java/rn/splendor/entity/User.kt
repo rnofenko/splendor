@@ -3,31 +3,53 @@ package rn.splendor.entity
 import rn.splendor.Global.Companion.userBankLimit
 
 class User {
-    val bank: Bank
+    val allGems: GemBank
+    val permanentGems: GemBank
+    val tempGems: GemBank
     var points: Int = 0
         private set
 
     constructor() {
-        bank = Bank.createEmpty()
+        allGems = GemBank.createEmpty()
+        permanentGems = GemBank.createEmpty()
+        tempGems = GemBank.createEmpty()
     }
 
-    constructor(bank: Bank, points: Int) {
-        this.bank = bank
+    constructor(tempGems: GemBank, permanentGems: GemBank, points: Int) {
+        this.allGems = GemBank.combine(tempGems, permanentGems)
+        this.permanentGems = permanentGems
         this.points = points
+        this.tempGems = tempGems
     }
 
     val hasTwoSpaces: Boolean
-        get() = userBankLimit - bank.total >= 2
+        get() = userBankLimit - tempGems.total >= 2
 
     val hasThreeSpaces: Boolean
-        get() = userBankLimit - bank.total >= 3
+        get() = userBankLimit - tempGems.total >= 3
 
     fun clone(): User {
-        return User(bank.clone(), points)
+        return User(tempGems.clone(), permanentGems.clone(), points)
     }
 
-    fun plus(bank: Bank) {
-        this.bank.plus(bank)
+    fun plus(bank: GemBank) {
+        this.allGems.plus(bank)
+        this.tempGems.plus(bank)
+    }
+
+    fun minus(bank: GemBank) {
+        this.allGems.minus(bank)
+        this.tempGems.minus(bank)
+    }
+
+    fun plus(gem: Gem, count: Int = 1): User {
+        this.allGems.plus(gem, count)
+        this.tempGems.plus(gem, count)
+        return this
+    }
+
+    fun plusPermanent(gem: Gem) {
+        this.permanentGems.plus(gem)
     }
 
     fun addPoints(card: Card) {

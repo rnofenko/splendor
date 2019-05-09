@@ -12,8 +12,7 @@ class TakeGemActionExecutor : IActionExecutor {
     }
 
     private fun executeImpl(state: State, action: TakeGemAction) {
-        val table = state.table
-        table.bank.minus(action.bank)
-        table.user.plus(action.bank)
+        state.table.bank.minus(action.bank)
+        state.user.plus(action.bank)
     }
 }

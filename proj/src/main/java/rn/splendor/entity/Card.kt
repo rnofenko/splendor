@@ -2,9 +2,9 @@ package rn.splendor.entity
 
 import rn.splendor.card.CardLevel
 
-class Card(val reward: Gem, val points: Int, val cost: Bank, val level: CardLevel, isBlank: Boolean = false) {
+class Card(val reward: Gem, val points: Int, val cost: GemBank, val level: CardLevel, isBlank: Boolean = false) {
     companion object {
-        val blank = Card(Gem.W, 0, Bank.createEmpty(), CardLevel.L2, true)
+        val blank = Card(Gem.W, 0, GemBank.createEmpty(), CardLevel.L2, true)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -25,5 +25,9 @@ class Card(val reward: Gem, val points: Int, val cost: Bank, val level: CardLeve
         result = 31 * result + points
         result = 31 * result + cost.hashCode()
         return result
+    }
+
+    override fun toString(): String {
+        return "${reward.name}$points $cost"
     }
 }

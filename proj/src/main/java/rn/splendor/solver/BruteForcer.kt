@@ -13,6 +13,7 @@ class BruteForcer {
     private val actionExecutor: IActionExecutor = ActionExecutor()
     private val printer = StatePrinter()
     private val actionProvider = UnitedActionProvider()
+    private val winPoints = 15;
 
     fun start(table: Table) {
         val root = State(table)
@@ -22,16 +23,16 @@ class BruteForcer {
 
     private fun next(state: State) {
         counter++
-        val actions = actionProvider.get(state.table)
+        val actions = actionProvider.get(state.table, state.user)
         if(actions.isEmpty()) {
             log.error("no actions")
         }
 
         log.info("$counter. StepNo=${state.stepNo} actions count=${actions.size} ")
-        printer.print(state)
+//        printer.print(state)
         for(action in actions) {
             val newState = actionExecutor.execute(state, action)
-            printer.print(newState)
+//            printer.print(newState)
             next(newState)
         }
     }

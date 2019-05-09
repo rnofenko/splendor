@@ -4,14 +4,14 @@ import rn.splendor.action.ActionFactory
 import rn.splendor.action.IAction
 import rn.splendor.action.IActionProvider
 import rn.splendor.entity.Table
+import rn.splendor.entity.User
 
 class BuyCardActionProvider : IActionProvider {
 
-    override fun get(table: Table): List<IAction> {
+    override fun get(table: Table, user: User): List<IAction> {
         val result = ArrayList<IAction>()
-        val userBank = table.user.bank
         for(card in table.deck.cards) {
-            if(userBank.equalOrMore(card.cost)) {
+            if(user.allGems.equalOrMore(card.cost)) {
                 result.add(ActionFactory.buyCard(card))
             }
         }

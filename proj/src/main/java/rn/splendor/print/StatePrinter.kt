@@ -1,6 +1,6 @@
 package rn.splendor.print
 
-import rn.splendor.entity.Bank
+import rn.splendor.entity.GemBank
 import rn.splendor.entity.Gem
 import rn.splendor.solver.State
 
@@ -34,11 +34,11 @@ class StatePrinter {
 
         printBank(table.bank, false)
         System.out.println()
-        printBank(table.user.bank, false)
+        printBank(state.user.allGems, false)
         System.out.println()
     }
 
-    private fun printBank(bank: Bank, skipZero: Boolean = true) {
+    private fun printBank(bank: GemBank, skipZero: Boolean = true) {
         printBankItem(bank, Gem.W, skipZero)
         printBankItem(bank, Gem.U, skipZero)
         printBankItem(bank, Gem.G, skipZero)
@@ -46,7 +46,7 @@ class StatePrinter {
         printBankItem(bank, Gem.B, skipZero)
     }
 
-    private fun printBankItem(bank: Bank, gem: Gem, skipZero: Boolean) {
+    private fun printBankItem(bank: GemBank, gem: Gem, skipZero: Boolean) {
         val count = bank.gems[gem.index]
         if(!skipZero || count > 0) {
             System.out.print(gemToColor[gem] + count)

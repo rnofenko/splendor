@@ -6,6 +6,7 @@ import rn.splendor.action.ActionFactory
 import rn.splendor.action.executor.BuyCardActionExecutor
 import rn.splendor.card.Gc
 import rn.splendor.entity.Gem
+import rn.splendor.entity.User
 import rn.splendor.solver.State
 import rn.splendor.tool.AppException
 import kotlin.test.assertEquals
@@ -15,11 +16,26 @@ class BuyCardActionExecutorTests {
     private lateinit var executor: BuyCardActionExecutor
 
     @Test
+    fun executor_should_increase_permanent_gem_when_user_buys_card() {
+        //prepare
+        val table = Tester.table(Gc.W1_G4)
+        val user = User().plus(Gem.G, 4)
+        val initialState = State(table, user)
+        val action = ActionFactory.buyCard(Gc.W1_G4)
+
+        //test
+        val newState = executor.execute(initialState, action)
+
+        //check
+        assertEquals(1, newState.user.permanentGems.gems[Gem.W.index])
+    }
+
+    @Test
     fun executor_should_return_gems_when_user_buys_card() {
         //prepare
         val table = Tester.table(Gc.W1_G4)
-        table.user.bank.plus(Gem.G, 4)
-        val initialState = State(table)
+        val user = User().plus(Gem.G, 4)
+        val initialState = State(table, user)
         val action = ActionFactory.buyCard(Gc.W1_G4)
 
         //test
@@ -33,7 +49,8 @@ class BuyCardActionExecutorTests {
     fun executor_should_throw_error_when_user_bank_is_empty() {
         //prepare
         val table = Tester.table(Gc.W1_G4)
-        val initialState = State(table)
+        val user = User().plus(Gem.G, 4)
+        val initialState = State(table, user)
         val action = ActionFactory.buyCard(Gc.W1_G4)
 
         //test
@@ -46,7 +63,7 @@ class BuyCardActionExecutorTests {
     fun executor_should_increase_points_when_user_bank_has_enough_gems() {
         //prepare
         val table = Tester.table(Gc.W1_G4)
-        table.user.bank.plus(Gem.G, 4)
+        table.user.plus(Gem.G, 4)
         val initialState = State(table)
         val action = ActionFactory.buyCard(Gc.W1_G4)
 
@@ -61,7 +78,7 @@ class BuyCardActionExecutorTests {
     fun executor_should_minus_gems_from_user() {
         //prepare
         val table = Tester.table(Gc.W1_G4)
-        table.user.bank.plus(Gem.G, 4)
+        table.user.plus(Gem.G, 4)
         val initialState = State(table)
         val action = ActionFactory.buyCard(Gc.W1_G4)
 
@@ -69,14 +86,14 @@ class BuyCardActionExecutorTests {
         val newState = executor.execute(initialState, action)
 
         //check
-        assertEquals(0, newState.table.user.bank.gems[Gem.G.index])
+        assertEquals(0, newState.table.user.tempGems.gems[Gem.G.index])
     }
 
     @Test
     fun executor_should_replace_card_on_table() {
         //prepare
         val table = Tester.table(Gc.W1_G4)
-        table.user.bank.plus(Gem.G, 4)
+        table.user.plus(Gem.G, 4)
         val initialState = State(table)
         val action = ActionFactory.buyCard(Gc.W1_G4)
 
