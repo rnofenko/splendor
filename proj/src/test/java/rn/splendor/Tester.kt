@@ -1,31 +1,23 @@
 package rn.splendor
 
-import rn.splendor.card.DefinedCardMagazine
-import rn.splendor.card.ICardMagazine
-import rn.splendor.entity.Card
+import rn.splendor.card.Deck
+import rn.splendor.card.SequencedCardMagazine
+import rn.splendor.card.Card
 import rn.splendor.card.Gc
-import rn.splendor.entity.Table
+import rn.splendor.entity.Game
 
 object Tester {
-    fun table(vararg cards: Card): Table {
+    fun table(vararg cards: Card): Game {
         val list = ArrayList<Card>()
         for(card in cards) {
             list.add(card)
         }
-        val magazine = magazine(list)
-        return TableFactory().create(magazine)
+        val deck = deck(list)
+        return GameFactory().create(deck)
     }
 
-    fun magazine(vararg cards: Card): ICardMagazine {
-        val list = ArrayList<Card>()
-        for(card in cards) {
-            list.add(card)
-        }
-        return magazine(list)
-    }
-
-    private fun magazine(cards: List<Card>): ICardMagazine {
-        return DefinedCardMagazine(fakeMagList(Gc.X0, cards), fakeMagList(Gc.X1), fakeMagList(Gc.X2))
+    private fun deck(cards: List<Card>): Deck {
+        return Deck(SequencedCardMagazine(), fakeMagList(Gc.X0, cards), fakeMagList(Gc.X1), fakeMagList(Gc.X2))
     }
 
     private fun fakeMagList(defaultCard: Card, initial: List<Card> = ArrayList()): List<Card> {

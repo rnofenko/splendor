@@ -61,6 +61,17 @@ class GemBank {
         this.total = this.gems.sum()
     }
 
+    fun calcSafeMinus(bank: GemBank): GemBank {
+        val res = gems.clone()
+        for (i in res.indices) {
+            res[i] -= bank.gems[i]
+            if(res[i] < 0) {
+                res[i] = 0
+            }
+        }
+        return GemBank(res)
+    }
+
     fun plus(bank: GemBank) {
         for (i in gems.indices) {
             gems[i] += bank.gems[i]
@@ -69,7 +80,15 @@ class GemBank {
     }
 
     override fun toString(): String {
-        return "W${gems[Gem.W.index]} U${gems[Gem.U.index]} G${gems[Gem.G.index]} R${gems[Gem.R.index]} B${gems[Gem.B.index]}"
+
+        val print = fun(gem: Gem): String {
+            if (gems[gem.index] == 0) {
+                return "-"
+            }
+            return gems[gem.index].toString()
+        }
+
+        return "${print(Gem.W)}${print(Gem.U)}${print(Gem.G)}${print(Gem.R)}${print(Gem.B)}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -86,6 +105,10 @@ class GemBank {
 
     override fun hashCode(): Int {
         return gems.contentHashCode()
+    }
+
+    fun getUniqueKey(): String {
+        return ""+gems[0]+gems[1]+gems[2]+gems[3]+gems[4]
     }
 
     companion object {

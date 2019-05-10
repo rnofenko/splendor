@@ -13,8 +13,8 @@ class BuyCardActionExecutor : IActionExecutor {
     }
 
     private fun executeImpl(state: State, action: BuyCardAction) {
-        val table = state.table
-        val deck = table.deck
+        val game = state.game
+        val table = game.table
         val user = state.user
         val card = action.card
 
@@ -22,13 +22,15 @@ class BuyCardActionExecutor : IActionExecutor {
             throw AppException("Not enough gems")
         }
 
-        user.addPoints(card)
-        user.minus(card.cost)
+        val finalCost = card.cost.calcSafeMinus(user.permanentGems)
+
+        user.addPoints(card.points)
+        user.minus(finalCost)
         user.plusPermanent(card.reward)
 
-        table.bank.plus(card.cost)
+        game.bank.plus(finalCost)
 
-        val newCard = table.magazine.pop(card.level)
-        deck.replace(card, newCard)
+        val newCard = game.deck.pop(card.level)
+        table.replace(card, newCard)
     }
 }

@@ -12,7 +12,7 @@ class TakeGemActionExecutor : IActionExecutor {
     }
 
     private fun executeImpl(state: State, action: TakeGemAction) {
-        state.table.bank.minus(action.bank)
+        state.game.bank.minus(action.bank)
         state.user.plus(action.bank)
     }
 }

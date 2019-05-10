@@ -1,7 +1,7 @@
 package rn.splendor.action
 
 import rn.splendor.entity.GemBank
-import rn.splendor.entity.Card
+import rn.splendor.card.Card
 
 class ActionFactory {
     companion object {

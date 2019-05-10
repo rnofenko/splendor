@@ -1,7 +1,6 @@
 package rn.splendor.card
 
 import rn.splendor.entity.GemBank
-import rn.splendor.entity.Card
 import rn.splendor.entity.Gem
 import java.util.*
 
@@ -62,4 +61,17 @@ object Gc {
             R0_U2G, R0_WGRB, R0_W2GRB, R0_W2R2, R0_W2GB2, R0_WRB3, R0_W3, R1_W4,
             B0_G2R, B0_WUGR, B0_WU2GR, B0_W2G2, B0_W2B2R, B0_GR3B, B0_G3, B1_U4
     )
+
+    private val N_3_WUB = Noble(3, GemBank.w(3,3,0,0,3))
+    private val N_3_UGR = Noble(3, GemBank.u(3,3,3))
+    private val N_3_WRB = Noble(3, GemBank.w(3, 0, 0,3,3))
+    private val N_3_WUG = Noble(3, GemBank.w(3, 3, 3))
+    private val N_3_GRB = Noble(3, GemBank.g(3, 3, 3))
+    private val N_4_GR = Noble(4, GemBank.g(4, 4))
+    private val N_4_UG = Noble(4, GemBank.u(4, 4))
+    private val N_4_RB = Noble(4, GemBank.r(4, 4))
+    private val N_4_WB = Noble(4, GemBank.w(4, 0, 0, 0, 4))
+    private val N_4_WU = Noble(4, GemBank.w(4, 4))
+
+    val nobles = Arrays.asList(N_3_WUB, N_3_UGR, N_3_WRB, N_3_WUG, N_3_GRB, N_4_GR, N_4_UG, N_4_RB, N_4_WB, N_4_WU)
 }

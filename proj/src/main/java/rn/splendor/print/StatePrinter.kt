@@ -16,8 +16,8 @@ class StatePrinter {
     }
 
     fun print(state: State) {
-        val table = state.table
-        val cards = table.deck.cards
+        val table = state.game
+        val cards = table.table.cards
 
         System.out.println(state.stepNo)
         var index = 0

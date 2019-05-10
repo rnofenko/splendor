@@ -37,9 +37,9 @@ class User {
         this.tempGems.plus(bank)
     }
 
-    fun minus(bank: GemBank) {
-        this.allGems.minus(bank)
-        this.tempGems.minus(bank)
+    fun minus(gems: GemBank) {
+        this.allGems.minus(gems)
+        this.tempGems.minus(gems)
     }
 
     fun plus(gem: Gem, count: Int = 1): User {
@@ -48,11 +48,18 @@ class User {
         return this
     }
 
-    fun plusPermanent(gem: Gem) {
+    fun plusPermanent(gem: Gem): User {
         this.permanentGems.plus(gem)
+        this.allGems.plus(gem)
+        return this
     }
 
-    fun addPoints(card: Card) {
-        points += card.points
+    fun addPoints(points: Int): User {
+        this.points += points
+        return this
+    }
+
+    fun getUniqueKey(): String {
+        return permanentGems.getUniqueKey() + tempGems.getUniqueKey() + points
     }
 }

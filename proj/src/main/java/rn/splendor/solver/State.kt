@@ -1,27 +1,35 @@
 package rn.splendor.solver
 
 import rn.splendor.action.IAction
-import rn.splendor.entity.Table
+import rn.splendor.entity.Game
 import rn.splendor.entity.User
 
 class State {
     val user: User
-    val table: Table
+    val game: Game
     val stepNo: Int
     val history: List<IAction>
 
-    constructor(table: Table, user: User, stepNo: Int, history: List<IAction>) {
-        this.table = table
+    constructor(game: Game, user: User, stepNo: Int, history: List<IAction>) {
+        this.game = game
         this.stepNo = stepNo
         this.history = history
         this.user = user
     }
 
-    constructor(table: Table, user: User) : this(table, user, 0, ArrayList())
+    constructor(game: Game, user: User) : this(game, user, 0, ArrayList())
 
     fun next(action: IAction): State {
         val newHistory = ArrayList(history)
         newHistory.add(action)
-        return State(table.clone(), user.clone(), stepNo + 1, newHistory)
+        return State(game.clone(), user.clone(), stepNo + 1, newHistory)
+    }
+
+    override fun toString(): String {
+        return "${user.points}/$stepNo"
+    }
+
+    fun getUniqueKey(): String {
+        return user.getUniqueKey() + game.getUniqueKey() + stepNo
     }
 }

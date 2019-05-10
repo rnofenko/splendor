@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import rn.splendor.action.provider.BuyCardActionProvider
 import rn.splendor.card.Gc
 import rn.splendor.entity.Gem
+import rn.splendor.entity.User
 import kotlin.test.assertEquals
 
 class BuyCardActionProviderTests {
@@ -15,10 +16,10 @@ class BuyCardActionProviderTests {
     fun provider_should_return_two_actions_when_user_bank_has_a_lot() {
         //prepare
         val table = Tester.table(Gc.W0_W3UB, Gc.W0_U2G2B)
-        table.user.plus(Gem.W, 3).plus(Gem.U, 2).plus(Gem.G, 2).plus(Gem.B)
+        val user = User().plus(Gem.W, 3).plus(Gem.U, 2).plus(Gem.G, 2).plus(Gem.B)
 
         //test
-        val actions = provider.get(table)
+        val actions = provider.get(table, user)
 
         //check
         assertEquals(2, actions.size)
@@ -28,10 +29,10 @@ class BuyCardActionProviderTests {
     fun provider_should_return_one_action_when_user_bank_has_only_for_one_card() {
         //prepare
         val table = Tester.table(Gc.W0_W3UB, Gc.W0_U2G2B)
-        table.user.plus(Gem.W, 3).plus(Gem.U).plus(Gem.B)
+        val user = User().plus(Gem.W, 3).plus(Gem.U).plus(Gem.B)
 
         //test
-        val actions = provider.get(table)
+        val actions = provider.get(table, user)
 
         //check
         assertEquals(1, actions.size)
@@ -43,7 +44,7 @@ class BuyCardActionProviderTests {
         val table = Tester.table(Gc.W0_W3UB)
 
         //test
-        val actions = provider.get(table)
+        val actions = provider.get(table, User())
 
         //check
         assertEquals(0, actions.size)
