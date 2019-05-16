@@ -2,5 +2,7 @@ package rn.splendor.action
 
 enum class ActionType {
     TakeGem,
-    BuyCard
+    BuyCard,
+    Noble,
+    Borrow
 }

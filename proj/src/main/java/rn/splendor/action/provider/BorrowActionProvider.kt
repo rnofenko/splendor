@@ -6,17 +6,16 @@ import rn.splendor.action.IActionProvider
 import rn.splendor.entity.Game
 import rn.splendor.entity.User
 
-class NobleActionProvider : IActionProvider {
+class BorrowActionProvider : IActionProvider {
     override fun get(game: Game, user: User): List<IAction> {
-        val result = ArrayList<IAction>()
-
-        for(noble in game.nobles) {
-            if(user.permanentGems.equalOrMore(noble.cost)) {
-                result.add(ActionFactory.noble(noble))
-            }
+        if(!user.hasOneSpace) {
+            return emptyList()
         }
 
-        return result
+        val actions = ArrayList<IAction>()
+        for (card in game.table.cards) {
+            actions.add(ActionFactory.borrow(card))
+        }
+        return actions
     }
-
 }

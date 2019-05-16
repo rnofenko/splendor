@@ -4,9 +4,6 @@ import rn.splendor.entity.Gem
 import rn.splendor.entity.GemBank
 
 class Card(val reward: Gem, val points: Int, val cost: GemBank, val level: CardLevel) {
-    companion object {
-        val blank = Card(Gem.W, 0, GemBank.createEmpty(), CardLevel.L2)
-    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

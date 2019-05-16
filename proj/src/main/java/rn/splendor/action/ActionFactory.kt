@@ -2,6 +2,7 @@ package rn.splendor.action
 
 import rn.splendor.entity.GemBank
 import rn.splendor.card.Card
+import rn.splendor.card.Noble
 
 class ActionFactory {
     companion object {
@@ -11,6 +12,14 @@ class ActionFactory {
 
         fun buyCard(card: Card) : IAction {
             return BuyCardAction(card)
+        }
+
+        fun noble(noble: Noble) : IAction {
+            return NobleAction(noble)
+        }
+
+        fun borrow(card: Card): IAction {
+            return BorrowAction(card)
         }
     }
 }

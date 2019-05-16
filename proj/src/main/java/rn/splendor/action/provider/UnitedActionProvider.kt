@@ -8,11 +8,18 @@ import rn.splendor.entity.User
 class UnitedActionProvider : IActionProvider {
     private val takeGemProvider = TakeGemActionProvider()
     private val buyCardProvider = BuyCardActionProvider()
+    private val nobleProvider = NobleActionProvider()
+    private val borrowProvider = BorrowActionProvider()
 
     override fun get(game: Game, user: User): List<IAction> {
-        val actions = ArrayList<IAction>()
+        val actions = ArrayList(nobleProvider.get(game, user))
+        if(actions.isNotEmpty()) {
+            return actions
+        }
+
         actions.addAll(takeGemProvider.get(game, user))
         actions.addAll(buyCardProvider.get(game, user))
+        actions.addAll(borrowProvider.get(game, user))
 
         return actions
     }

@@ -48,7 +48,10 @@ class BruteForcer {
 
             best = winCondition.getBest(newState, best)
 
-            //log.info("$counter. Current ${newState.user.points}/${newState.stepNo}  Best ${best.user.points}/${best.stepNo}")
+            if(counter % 10000 == 0) {
+                log.info("$counter. Current ${newState.user.points}/${newState.stepNo}  Best ${best.user.points}/${best.stepNo}")
+            }
+
             if(newState.stepNo < best.stepNo) {
                 best = next(newState, best)
             }

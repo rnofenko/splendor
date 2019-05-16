@@ -19,10 +19,11 @@ class State {
 
     constructor(game: Game, user: User) : this(game, user, 0, ArrayList())
 
-    fun next(action: IAction): State {
+    fun next(action: IAction, keepStepNo: Boolean = false): State {
         val newHistory = ArrayList(history)
         newHistory.add(action)
-        return State(game.clone(), user.clone(), stepNo + 1, newHistory)
+        val newStepNo = if(keepStepNo) stepNo else stepNo + 1
+        return State(game.clone(), user.clone(), newStepNo, newHistory)
     }
 
     override fun toString(): String {

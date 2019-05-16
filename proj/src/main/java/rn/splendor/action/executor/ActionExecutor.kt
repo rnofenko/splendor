@@ -6,8 +6,10 @@ import rn.splendor.tool.AppException
 
 class ActionExecutor : IActionExecutor {
     private val map = mapOf(
+            ActionType.Borrow to BorrowActionExecutor(),
             ActionType.TakeGem to TakeGemActionExecutor(),
-            ActionType.BuyCard to BuyCardActionExecutor())
+            ActionType.BuyCard to BuyCardActionExecutor(),
+            ActionType.Noble to NobleActionExecutor())
 
     override fun execute(state: State, action: IAction): State {
         val executor = map[action.type] ?: throw AppException("No action executor")
