@@ -44,9 +44,9 @@ class BuyCardActionExecutorTests {
 
         //check
         val newUser = newState.user
-        assertEquals(1, newUser.permanentGems.gems[Gem.G.index])
-        assertEquals(1, newUser.tempGems.gems[Gem.G.index], "tempGems")
-        assertEquals(2, newUser.allGems.gems[Gem.G.index])
+        assertEquals(1, Access.getPermanentGem(newUser, Gem.G))
+        assertEquals(1, Access.getTempGem(newUser, Gem.G), "tempGems")
+        assertEquals(2, Access.getAllGem(newUser, Gem.G))
     }
 
     @Test
@@ -61,7 +61,7 @@ class BuyCardActionExecutorTests {
         val newState = executor.execute(initialState, action)
 
         //check
-        assertEquals(1, newState.user.permanentGems.gems[Gem.W.index])
+        assertEquals(1, Access.getPermanentGem(newState.user, Gem.W))
     }
 
     @Test
@@ -118,7 +118,7 @@ class BuyCardActionExecutorTests {
         val newState = executor.execute(initialState, action)
 
         //check
-        assertEquals(0, newState.user.tempGems.gems[Gem.G.index])
+        assertEquals(0, Access.getTempGem(newState.user, Gem.G))
     }
 
     @Test

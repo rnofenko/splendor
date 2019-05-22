@@ -54,7 +54,7 @@ class BorrowActionExecutorTests {
         //prepare
         val card = Gc.W1_G4
         val table = Tester.table(card)
-        val user = User().plus(Gem.W, 9).addGold()
+        val user = User().plus(Gem.W, 9).plusGold()
         val initialState = State(table, user)
         val action = ActionFactory.borrow(card)
 

@@ -2,10 +2,16 @@ package rn.splendor
 
 import rn.splendor.card.*
 import rn.splendor.entity.Game
+import rn.splendor.entity.GemBank
+import rn.splendor.entity.User
 import java.util.*
 import kotlin.collections.ArrayList
 
 object Tester {
+    fun game(): Game {
+        return GameFactory().create(deck(), ArrayList())
+    }
+
     fun table(card: Card): Game {
         val deck = deck(Arrays.asList(card))
         return GameFactory().create(deck, ArrayList())

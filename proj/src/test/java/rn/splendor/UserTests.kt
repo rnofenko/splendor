@@ -17,8 +17,8 @@ class UserTests {
         user.plusPermanent(Gem.W)
 
         //check
-        assertEquals(1, user.permanentGems.gems[Gem.W.index])
-        assertEquals(1, user.allGems.gems[Gem.W.index])
+        assertEquals(1, Access.getPermanentGems(user).gems[Gem.W.index])
+        assertEquals(1, Access.getAllGem(user, Gem.W))
     }
 
     @Test
@@ -29,9 +29,9 @@ class UserTests {
         user.minus(GemBank.w(2))
 
         //check
-        assertEquals(1, user.permanentGems.gems[Gem.W.index])
-        assertEquals(2, user.tempGems.gems[Gem.W.index], "tempGems")
-        assertEquals(3, user.allGems.gems[Gem.W.index])
+        assertEquals(1, Access.getPermanentGem(user, Gem.W))
+        assertEquals(2, Access.getTempGem(user, Gem.W), "tempGems")
+        assertEquals(3, Access.getAllGem(user, Gem.W))
     }
 
     @Test

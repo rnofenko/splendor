@@ -11,7 +11,7 @@ class BuyCardActionProvider : IActionProvider {
     override fun get(game: Game, user: User): List<IAction> {
         val result = ArrayList<IAction>()
         for(card in game.table.cards) {
-            if(user.allGems.equalOrMore(card.cost)) {
+            if(user.canBuy(card)) {
                 result.add(ActionFactory.buyCard(card))
             }
         }

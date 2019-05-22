@@ -18,11 +18,11 @@ class BuyCardActionExecutor : IActionExecutor {
         val user = state.user
         val card = action.card
 
-        if(user.allGems.less(card.cost)) {
+        if(!user.canBuy(card)) {
             throw AppException("Not enough gems")
         }
 
-        val finalCost = card.cost.calcSafeMinus(user.permanentGems)
+        val finalCost = user.calcBuyCost(card)
 
         user.addPoints(card.points)
         user.minus(finalCost)

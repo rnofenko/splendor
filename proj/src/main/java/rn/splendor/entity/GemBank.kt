@@ -20,6 +20,20 @@ class GemBank {
         this.total = this.gems.sum()
     }
 
+    fun equalOrMore(bank: GemBank, gold: Int): Boolean {
+        var negative = 0
+        for (i in gems.indices) {
+            val diff = gems[i] - bank.gems[i]
+            if(diff < 0) {
+                negative += (-diff)
+                if(negative > gold) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
     fun equalOrMore(bank: GemBank): Boolean {
         for (i in gems.indices) {
             if(gems[i] < bank.gems[i]) {

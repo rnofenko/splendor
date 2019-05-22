@@ -11,7 +11,7 @@ class NobleActionProvider : IActionProvider {
         val result = ArrayList<IAction>()
 
         for(noble in game.nobles) {
-            if(user.permanentGems.equalOrMore(noble.cost)) {
+            if(user.canTake(noble)) {
                 result.add(ActionFactory.noble(noble))
             }
         }

@@ -23,7 +23,7 @@ class TakeGemActionProvider : IActionProvider {
             return Choices.gem3AndDuplicate
         }
 
-        if (game.bank.total >= 2 &&user.hasTwoSpaces) {
+        if (game.bank.total >= 2 && user.hasTwoSpaces) {
             return Choices.gem2
         }
 

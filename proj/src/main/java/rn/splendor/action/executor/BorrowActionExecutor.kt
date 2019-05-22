@@ -27,7 +27,7 @@ class BorrowActionExecutor : IActionExecutor {
             throw AppException("Reach limit of borrows cards")
         }
 
-        user.addGold()
+        user.plusGold()
         game.takeGold()
 
         user.add(card)

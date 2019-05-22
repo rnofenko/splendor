@@ -14,7 +14,7 @@ class NobleActionExecutor : IActionExecutor {
     private fun executeImpl(state: State, action: NobleAction) {
         val noble = action.noble
         val user = state.user
-        if(user.permanentGems.less(noble.cost)) {
+        if(!user.canTake(noble)) {
             throw AppException("Not enough permanentGems")
         }
 
