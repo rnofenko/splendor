@@ -68,22 +68,20 @@ class GemBank {
         return GemBank(gems.clone())
     }
 
-    fun minus(bank: GemBank) {
+    fun minus(subtrahendBank: GemBank): Int {
+        var negative = 0
+        val subtrahend = subtrahendBank.gems
         for (i in gems.indices) {
-            gems[i] -= bank.gems[i]
-        }
-        this.total = this.gems.sum()
-    }
-
-    fun calcSafeMinus(bank: GemBank): GemBank {
-        val res = gems.clone()
-        for (i in res.indices) {
-            res[i] -= bank.gems[i]
-            if(res[i] < 0) {
-                res[i] = 0
+            val res = gems[i] - subtrahend[i]
+            if(res < 0) {
+                gems[i] = 0
+                negative += res
+            } else {
+                gems[i] = res
             }
         }
-        return GemBank(res)
+        this.total = this.gems.sum()
+        return -negative
     }
 
     fun plus(bank: GemBank) {
@@ -91,6 +89,13 @@ class GemBank {
             gems[i] += bank.gems[i]
         }
         this.total = this.gems.sum()
+    }
+
+    fun copy(bank: GemBank) {
+        for (i in gems.indices) {
+            gems[i] = bank.gems[i]
+        }
+        this.total = bank.total
     }
 
     override fun toString(): String {
@@ -123,6 +128,13 @@ class GemBank {
 
     fun getUniqueKey(): String {
         return ""+gems[0]+gems[1]+gems[2]+gems[3]+gems[4]
+    }
+
+    fun reset() {
+        for (i in gems.indices) {
+            gems[i] = 0
+        }
+        total = 0
     }
 
     companion object {

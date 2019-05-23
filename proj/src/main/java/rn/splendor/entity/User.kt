@@ -5,7 +5,7 @@ import rn.splendor.card.Card
 import rn.splendor.card.Noble
 
 class User {
-    private val allGems: GemBank
+    private var allGems: GemBank
     private val permanentGems: GemBank
     private val tempGems: GemBank
     var points: Int = 0
@@ -49,8 +49,11 @@ class User {
     }
 
     fun minus(gems: GemBank) {
-        this.allGems.minus(gems)
-        this.tempGems.minus(gems)
+        val negative = this.tempGems.minus(gems)
+        gold -= negative
+
+        allGems.copy(permanentGems)
+        allGems.plus(tempGems)
     }
 
     fun plus(gem: Gem, count: Int = 1): User {
@@ -89,7 +92,7 @@ class User {
     }
 
     fun calcBuyCost(card: Card): GemBank {
-        return card.cost.calcSafeMinus(permanentGems)
+        return Calculator.minus(card.cost, permanentGems)
     }
 
     fun canTake(noble: Noble): Boolean {

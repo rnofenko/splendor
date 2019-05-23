@@ -16,6 +16,42 @@ class BuyCardActionExecutorTests {
     private lateinit var executor: BuyCardActionExecutor
 
     @Test
+    fun executor_should_return_gold_when_user_exceeds_other_resources() {
+        //prepare
+        val table = Tester.table(Gc.W1_G4)
+        val initialUser = User().plus(Gem.G, 1).plusPermanent(Gem.G, 2).plusGold()
+        val initialState = State(table, initialUser)
+        val action = ActionFactory.buyCard(Gc.W1_G4)
+
+        //test
+        val newState = executor.execute(initialState, action)
+
+        //check
+        val user = newState.user
+        assertEquals(2, Access.getPermanentGem(user, Gem.G))
+        assertEquals(0, Access.getTempGem(user, Gem.G))
+        assertEquals(0, user.gold)
+    }
+
+    @Test
+    fun executor_should_not_return_gold_when_user_has_enough_other_resources() {
+        //prepare
+        val table = Tester.table(Gc.W1_G4)
+        val initialUser = User().plus(Gem.G, 2).plusPermanent(Gem.G, 2).plusGold()
+        val initialState = State(table, initialUser)
+        val action = ActionFactory.buyCard(Gc.W1_G4)
+
+        //test
+        val newState = executor.execute(initialState, action)
+
+        //check
+        val user = newState.user
+        assertEquals(2, Access.getPermanentGem(user, Gem.G))
+        assertEquals(0, Access.getTempGem(user, Gem.G))
+        assertEquals(1, user.gold)
+    }
+
+    @Test
     fun executor_should_not_return_to_table_full_cost_when_user_uses_permanent_gems() {
         //prepare
         val table = Tester.table(Gc.W1_G4)
