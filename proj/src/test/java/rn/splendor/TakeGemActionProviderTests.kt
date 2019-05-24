@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import rn.splendor.action.provider.TakeGemActionProvider
 import rn.splendor.entity.Gem
 import rn.splendor.entity.User
+import rn.splendor.util.Tester
 import kotlin.test.assertEquals
 
 class TakeGemActionProviderTests {

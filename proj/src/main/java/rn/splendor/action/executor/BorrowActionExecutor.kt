@@ -23,14 +23,14 @@ class BorrowActionExecutor : IActionExecutor {
             throw AppException("Not enough space")
         }
 
-        if(user.borrowed.size == CardSet.borrowLimit) {
+        if(!user.canBorrow()) {
             throw AppException("Reach limit of borrows cards")
         }
 
         user.plusGold()
         game.takeGold()
 
-        user.add(card)
+        user.borrow(card)
         val newCard = game.deck.pop(card.level)
         table.replace(card, newCard)
     }

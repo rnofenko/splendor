@@ -6,17 +6,16 @@ import rn.splendor.action.IActionProvider
 import rn.splendor.entity.Game
 import rn.splendor.entity.User
 
-class BuyCardActionProvider : IActionProvider {
+class RedeemCardActionProvider : IActionProvider {
 
     override fun get(game: Game, user: User): List<IAction> {
         val result = ArrayList<IAction>()
-        for(card in game.table.cards) {
+        for(card in user.getBorrowed()) {
             if(user.canBuy(card)) {
-                result.add(ActionFactory.buyCard(card))
+                result.add(ActionFactory.redeemCard(card))
             }
         }
 
         return result
     }
 }
-

@@ -5,6 +5,7 @@ import rn.splendor.card.Gc
 import rn.splendor.entity.Gem
 import rn.splendor.entity.GemBank
 import rn.splendor.entity.User
+import rn.splendor.util.Access
 import kotlin.test.assertEquals
 
 class UserTests {
@@ -36,12 +37,12 @@ class UserTests {
 
     @Test
     fun clone_should_keep_borrowed() {
-        val user = User().add(Gc.W1_G4)
+        val user = User().borrow(Gc.W1_G4)
 
         //test
         val newUser = user.clone()
 
         //check
-        assertEquals(1, newUser.borrowed.size)
+        assertEquals(1, newUser.getBorrowed().size)
     }
 }

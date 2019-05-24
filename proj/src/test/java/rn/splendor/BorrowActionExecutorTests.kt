@@ -9,6 +9,7 @@ import rn.splendor.entity.Gem
 import rn.splendor.entity.User
 import rn.splendor.solver.State
 import rn.splendor.tool.AppException
+import rn.splendor.util.Tester
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

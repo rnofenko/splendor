@@ -8,7 +8,7 @@ import rn.splendor.entity.User
 
 class BorrowActionProvider : IActionProvider {
     override fun get(game: Game, user: User): List<IAction> {
-        if(!user.hasOneSpace) {
+        if(!user.canBorrow()) {
             return emptyList()
         }
 

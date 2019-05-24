@@ -2,6 +2,7 @@ package rn.splendor.entity
 
 import rn.splendor.Global.Companion.userBankLimit
 import rn.splendor.card.Card
+import rn.splendor.card.CardSet
 import rn.splendor.card.Noble
 
 class User {
@@ -12,7 +13,7 @@ class User {
         private set
     var gold: Int = 0
         private set
-    val borrowed: ArrayList<Card>
+    private val borrowed: ArrayList<Card>
 
     constructor() {
         allGems = GemBank.createEmpty()
@@ -82,11 +83,6 @@ class User {
         return permanentGems.getUniqueKey() + tempGems.getUniqueKey() + points
     }
 
-    fun add(card: Card): User {
-        borrowed.add(card)
-        return this
-    }
-
     fun canBuy(card: Card): Boolean {
         return allGems.equalOrMore(card.cost, gold)
     }
@@ -97,5 +93,22 @@ class User {
 
     fun canTake(noble: Noble): Boolean {
         return permanentGems.equalOrMore(noble.cost)
+    }
+
+    fun canBorrow(): Boolean {
+        return borrowed.size < CardSet.borrowLimit && hasOneSpace
+    }
+
+    fun borrow(card: Card): User {
+        borrowed.add(card)
+        return this
+    }
+
+    fun redeem(card: Card) {
+        borrowed.remove(card)
+    }
+
+    fun getBorrowed(): List<Card> {
+        return borrowed
     }
 }

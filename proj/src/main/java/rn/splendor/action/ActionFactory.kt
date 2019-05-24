@@ -14,6 +14,10 @@ class ActionFactory {
             return BuyCardAction(card)
         }
 
+        fun redeemCard(card: Card) : IAction {
+            return RedeemCardAction(card)
+        }
+
         fun noble(noble: Noble) : IAction {
             return NobleAction(noble)
         }

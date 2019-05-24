@@ -9,6 +9,7 @@ import rn.splendor.entity.Gem
 import rn.splendor.entity.User
 import rn.splendor.solver.State
 import rn.splendor.tool.AppException
+import rn.splendor.util.Tester
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
@@ -18,7 +19,7 @@ class NobleActionExecutorTests {
     @Test
     fun executor_should_remove_noble_when_user_has_enough_gems() {
         //prepare
-        val noble = Gc.N_4_WB
+        val noble = Gc.N4_WB
         val table = Tester.table(noble)
         val user = User().plusPermanent(Gem.W, 4).plusPermanent(Gem.B, 4)
         val initialState = State(table, user)
@@ -35,7 +36,7 @@ class NobleActionExecutorTests {
     @Test
     fun executor_should_keep_the_same_stepNo_for_noble() {
         //prepare
-        val noble = Gc.N_4_WB
+        val noble = Gc.N4_WB
         val table = Tester.table(noble)
         val user = User().plusPermanent(Gem.W, 4).plusPermanent(Gem.B, 4)
         val initialState = State(table, user)
@@ -52,7 +53,7 @@ class NobleActionExecutorTests {
     @Test
     fun executor_should_increase_points_when_user_has_enough_gems() {
         //prepare
-        val noble = Gc.N_4_WB
+        val noble = Gc.N4_WB
         val table = Tester.table(noble)
         val user = User().plusPermanent(Gem.W, 4).plusPermanent(Gem.B, 4)
         val initialState = State(table, user)
@@ -68,7 +69,7 @@ class NobleActionExecutorTests {
     @Test
     fun executor_should_ignore_temp_gems() {
         //prepare
-        val noble = Gc.N_4_WB
+        val noble = Gc.N4_WB
         val table = Tester.table(noble)
         val user = User().plus(Gem.W, 4).plusPermanent(Gem.W).plus(Gem.B, 4).plusPermanent(Gem.B)
         val initialState = State(table, user)

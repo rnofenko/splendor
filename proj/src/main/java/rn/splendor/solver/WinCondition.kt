@@ -1,13 +1,13 @@
 package rn.splendor.solver
 
-class WinCondition {
-    val winPoints = 15
+import rn.splendor.card.CardSet
 
+class WinCondition {
     fun getBest(state1: State, state2: State): State {
-        if(state1.user.points < winPoints) {
+        if(state1.user.points < CardSet.WIN_POINTS) {
             return state2
         }
-        if(state2.user.points < winPoints) {
+        if(state2.user.points < CardSet.WIN_POINTS) {
             return state1
         }
         if(state1.stepNo == state2.stepNo) {

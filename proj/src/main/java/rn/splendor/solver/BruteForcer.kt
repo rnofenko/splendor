@@ -5,6 +5,7 @@ import rn.splendor.action.IAction
 import rn.splendor.action.executor.ActionExecutor
 import rn.splendor.action.executor.IActionExecutor
 import rn.splendor.action.provider.UnitedActionProvider
+import rn.splendor.card.CardSet
 import rn.splendor.print.StatePrinter
 import rn.splendor.entity.Game
 import rn.splendor.entity.User
@@ -24,7 +25,7 @@ class BruteForcer {
         val root = State(game, User())
         printer.print(root)
 
-        val best = State(game, User().addPoints(winCondition.winPoints), 100, ArrayList())
+        val best = State(game, User().addPoints(CardSet.WIN_POINTS), 100, ArrayList())
 
         val final = next(root, best)
         printer.print(final)
@@ -42,14 +43,19 @@ class BruteForcer {
         for(action in actions) {
             val newState = execute(state, action)
 
-            if(!set.add(newState.getUniqueKey())) {
-                return best
+//            if(!set.add(newState.getUniqueKey())) {
+//                return best
+//            }
+
+            val oldBest = best
+            best = winCondition.getBest(best, newState)
+            if(oldBest != best && best.user.points >= CardSet.WIN_POINTS) {
+                printer.print(best)
             }
 
-            best = winCondition.getBest(newState, best)
-
-            if(counter % 10000 == 0) {
-                log.info("$counter. Current ${newState.user.points}/${newState.stepNo}  Best ${best.user.points}/${best.stepNo}")
+            if(counter % 5000000 == 0) {
+                val m = counter / 1000000
+                log.info("$m. Current ${newState.user.points}/${newState.stepNo}  Best ${best.user.points}/${best.stepNo}")
             }
 
             if(newState.stepNo < best.stepNo) {

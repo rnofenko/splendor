@@ -1,4 +1,4 @@
-package rn.splendor
+package rn.splendor.util
 
 import rn.splendor.entity.Gem
 import rn.splendor.entity.GemBank
@@ -6,17 +6,17 @@ import rn.splendor.entity.User
 
 object Access {
     fun getPermanentGems(user: User): GemBank {
-        val value = getUserField(user,"permanentGems")
+        val value = getUserField(user, "permanentGems")
         return value as GemBank
     }
 
     private fun getTempGems(user: User): GemBank {
-        val value = getUserField(user,"tempGems")
+        val value = getUserField(user, "tempGems")
         return value as GemBank
     }
 
     private fun getAllGems(user: User): GemBank {
-        val value = getUserField(user,"allGems")
+        val value = getUserField(user, "allGems")
         return value as GemBank
     }
 

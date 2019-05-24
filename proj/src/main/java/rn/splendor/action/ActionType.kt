@@ -4,5 +4,6 @@ enum class ActionType {
     TakeGem,
     BuyCard,
     Noble,
-    Borrow
+    Borrow,
+    Redeem
 }

@@ -6,6 +6,7 @@ import rn.splendor.action.provider.BuyCardActionProvider
 import rn.splendor.card.Gc
 import rn.splendor.entity.Gem
 import rn.splendor.entity.User
+import rn.splendor.util.Tester
 import kotlin.test.assertEquals
 
 class BuyCardActionProviderTests {

@@ -35,7 +35,7 @@ class StatePrinter {
         printBank(table.bank, false)
         System.out.println()
 //        printBank(state.user.allGems, false)
-        System.out.println()
+//        System.out.println()
     }
 
     private fun printBank(bank: GemBank, skipZero: Boolean = true) {

@@ -3,6 +3,10 @@ package rn.splendor.card
 class Table {
     val cards: Array<Card>
 
+    constructor(cards: List<Card>) {
+        this.cards = cards.toTypedArray()
+    }
+
     constructor(cards: Array<Card>) {
         this.cards = cards.clone()
     }

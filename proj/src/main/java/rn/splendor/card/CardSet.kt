@@ -10,9 +10,11 @@ class CardSet {
 
         val allLevel2: List<Card> = Gc.level2
 
-        const val initialGoldCount = 3
+        const val initialGoldCount = 5
         const val initialNoblesCount = 3L
         const val borrowLimit = 3
+
+        const val WIN_POINTS = 15
     }
 }
 

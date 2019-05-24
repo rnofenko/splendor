@@ -1,9 +1,8 @@
-package rn.splendor
+package rn.splendor.util
 
+import rn.splendor.GameFactory
 import rn.splendor.card.*
 import rn.splendor.entity.Game
-import rn.splendor.entity.GemBank
-import rn.splendor.entity.User
 import java.util.*
 import kotlin.collections.ArrayList
 

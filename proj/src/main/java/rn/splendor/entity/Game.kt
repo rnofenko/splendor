@@ -13,7 +13,7 @@ class Game {
     var gold: Int = 0
         private set
 
-    constructor(cards: Array<Card>, deck: Deck, nobles: List<Noble>, gold: Int) {
+    constructor(cards: List<Card>, deck: Deck, nobles: List<Noble>, gold: Int) {
         bank = GemBank.createForTable()
         table = Table(cards)
         this.deck = deck

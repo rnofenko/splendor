@@ -9,7 +9,8 @@ class ActionExecutor : IActionExecutor {
             ActionType.Borrow to BorrowActionExecutor(),
             ActionType.TakeGem to TakeGemActionExecutor(),
             ActionType.BuyCard to BuyCardActionExecutor(),
-            ActionType.Noble to NobleActionExecutor())
+            ActionType.Noble to NobleActionExecutor(),
+            ActionType.Redeem to RedeemCardActionExecutor())
 
     override fun execute(state: State, action: IAction): State {
         val executor = map[action.type] ?: throw AppException("No action executor")
